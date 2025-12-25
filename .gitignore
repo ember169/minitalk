@@ -1,0 +1,15 @@
+*.o
+*.a
+*.so
+*.d
+*.out
+*.log
+
+server
+client
+
+.DS_Store
+.vscode/
+.idea/
+*~
+*.swp
