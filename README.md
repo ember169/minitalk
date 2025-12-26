@@ -3,23 +3,24 @@ _This project has been created as part of the 42 curriculum by lgervet_
 # Description
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
 
-![Flowchart](https://github.com/user-attachments/assets/1a8521e6-16cc-4c98-877f-96a63c7f13f2)
+![Flowchart](https://github.com/user-attachments/assets/7a65aefb-11f3-4444-b78b-d071f90144b4)
 
 Client encodes a str into binary.
-Send bit to server with SIGUSR1 bit by bit.
+0 = SIGUSR1 || 1 = SIGUSR2
+Send bit to server with SIGUSR1 or SIGUSR2 bit by bit.
 Waits for SIGUSR2 sent by server to acknowledge received bit.
 Then proceed with next bit until done.
-Server needs to put its data into an array everytime it receives a bit and when done (client with send SIGUSR2) decode binary to ascii char
+Server needs to put its data into an array everytime it receives a bit and when done decode binary to ascii char
 
 __CLIENT__
 Encode str into binary
-Send current with SIGUSR1
+Send current with SIGUSR1 || SIGUSR2
 __SERVER__
 Stocks bit in array
 Send SIGUSR2 to say it was received
 __CLIENT__
 current++
-Send current with SIGUSR1
+Send current with SIGUSR1 || SIGUSR2
 **repeat**
 
 # Instructions
