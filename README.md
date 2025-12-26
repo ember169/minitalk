@@ -4,25 +4,27 @@ _This project has been created as part of the 42 curriculum by lgervet_
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
 
 ```mermaid
-mindmap
-  root((Signal Protocol))
-    Client Process
-      ::icon(fa fa-laptop)
-      Encode String
-      Loop Bits
-        Send SIGUSR1
-        Wait for Ack
-      End Transmission
-        Send SIGUSR2
-    Server Process
-      ::icon(fa fa-server)
-      Wait for Signal
-      On SIGUSR1
-        Add bit to Array
-        Send SIGUSR2 (Ack)
-      On SIGUSR2
-        Decode to ASCII
-        Print Output
+sequenceDiagram
+    autonumber
+    participant C as 🖥️ CLIENT
+    participant S as ⚙️ SERVER
+
+    Note over C: Encode string to binary
+
+    loop For every bit in string
+        C->>S: Signal SIGUSR1 (Send Bit)
+        activate S
+        Note right of S: Store bit in array
+        S-->>C: Signal SIGUSR2 (Acknowledge)
+        deactivate S
+        Note left of C: current++
+    end
+
+    C->>S: Signal SIGUSR2 (Transmission Complete)
+    activate S
+    Note right of S: Decode Binary -> ASCII
+    Note right of S: Print String
+    deactivate S
 ```
 
 Client encodes a str into binary.
