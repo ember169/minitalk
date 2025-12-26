@@ -3,29 +3,7 @@ _This project has been created as part of the 42 curriculum by lgervet_
 # Description
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant C as 🖥️ CLIENT
-    participant S as ⚙️ SERVER
-
-    Note over C: Encode string to binary
-
-    loop For every bit in string
-        C->>S: Signal SIGUSR1 (Send Bit)
-        activate S
-        Note right of S: Store bit in array
-        S-->>C: Signal SIGUSR2 (Acknowledge)
-        deactivate S
-        Note left of C: current++
-    end
-
-    C->>S: Signal SIGUSR2 (Transmission Complete)
-    activate S
-    Note right of S: Decode Binary -> ASCII
-    Note right of S: Print String
-    deactivate S
-```
+![Flowchart](https://github.com/user-attachments/assets/1a8521e6-16cc-4c98-877f-96a63c7f13f2)
 
 Client encodes a str into binary.
 Send bit to server with SIGUSR1 bit by bit.
