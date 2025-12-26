@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:06 by lgervet           #+#    #+#             */
-/*   Updated: 2025/12/25 19:44:02 by lgervet          ###   ########.fr       */
+/*   Updated: 2025/12/25 19:59:40 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 {
 	pid_t	pid;
 	pid_t	target;
-	int		arr[];
+	int		arr;
 
 	if (!ac)
 	{

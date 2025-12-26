@@ -3,6 +3,28 @@ _This project has been created as part of the 42 curriculum by lgervet_
 # Description
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
 
+```mermaid
+mindmap
+  root((Signal Protocol))
+    Client Process
+      ::icon(fa fa-laptop)
+      Encode String
+      Loop Bits
+        Send SIGUSR1
+        Wait for Ack
+      End Transmission
+        Send SIGUSR2
+    Server Process
+      ::icon(fa fa-server)
+      Wait for Signal
+      On SIGUSR1
+        Add bit to Array
+        Send SIGUSR2 (Ack)
+      On SIGUSR2
+        Decode to ASCII
+        Print Output
+```
+
 Client encodes a str into binary.
 Send bit to server with SIGUSR1 bit by bit.
 Waits for SIGUSR2 sent by server to acknowledge received bit.
