@@ -6,13 +6,14 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 14:52:00 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/03 16:14:54 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/05 13:07:21 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "../includes/minitalk.h"
 
 /*
@@ -86,42 +87,51 @@
 	one str in binary = multiple str (1 by char)
 */
 
-char	*convert_char_to_binary(int char_int, int byte_nb)
+char	*convert_char_to_binary(int char_int, int byte_nb, int bits_nb)
 {
-	int		i = 0;
-	int		to_convert = char_int;
+	int		i;
+	int		j;
 	char	*encoded_char;
 
 	encoded_char = malloc((8 * sizeof(char)) + 1);
 	if (!encoded_char)
 		return (NULL);
+	i = 0;
 	while (i < byte_nb)
 	{
-		encoded_char[i] = (to_convert % 2) + '0';
-		to_convert /= 2;
+		j = 0;
+		while (j < bits_nb)
+		{
+			encoded_char[bits_nb - 1 - j] = ((char_int >> j) & 1) + '0';
+			j++;
+		}
 		i++;
 	}
-	encoded_char[i] = '\0';
+	encoded_char[bits_nb] = '\0';
+
 	printf("[ ] Encoded char %d: %s\n", char_int, encoded_char);
 	return (encoded_char);
 }
 
-int main()
+int	main(int ac, char **av)
 {
-	int		byte_nb = 8 ; // for utf8
-	int 	i = 0;
-	int 	len = 0;
-	char	*input = "lorem";
-	char 	**encoded;
+	int		i;
+	size_t	len;
+	char	**encoded;
+	int		byte_nb = 1 ; // for utf8
+	int		bits_nb = 8 ; // for utf8
 
-	len = strlen(input);
-	encoded = (char *)malloc((sizeof(char) * (len + 1)) * 8);
+	if (ac < 2)
+		return (1);
+	len = strlen(av[1]);
+	encoded = (char **)malloc((sizeof(*encoded) * (len + 1)) * byte_nb);
 	if (!encoded)
-		return (NULL);
-	printf("[x] IN: %s\n", input);
+		return (1);
+	printf("[x] IN: %s\n", av[1]);
+	i = 0;
 	while (i < len)
 	{
-		encoded[i] = convert_char_to_binary((int)input[i], byte_nb);
+		encoded[i] = convert_char_to_binary((int)av[1][i], byte_nb, bits_nb);
 		i++;
 	}
 	printf("[x] OUT: ");
