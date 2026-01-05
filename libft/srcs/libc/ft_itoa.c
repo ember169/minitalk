@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:38:43 by lgervet           #+#    #+#             */
-/*   Updated: 2025/12/20 10:20:07 by lgervet          ###   ########.fr       */
+/*   Updated: 2025/12/30 14:24:08 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #include "includes/libft.h"
 
-size_t	_charactercounter(long nb)
+static size_t	charactercounter(long nb)
 {
 	size_t	i;
 
@@ -54,7 +54,7 @@ char	*ft_itoa(int n)
 	char	*s;
 
 	nb = n;
-	len = _charactercounter(nb);
+	len = charactercounter(nb);
 	s = (char *)malloc((len + 1) * sizeof(char));
 	if (!s)
 		return (NULL);

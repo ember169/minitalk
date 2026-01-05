@@ -13,3 +13,4 @@ client
 .idea/
 *~
 *.swp
+*.dSYM
