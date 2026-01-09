@@ -3,6 +3,8 @@ _[Subject (pdf)](https://cdn.intra.42.fr/pdf/pdf/185021/en.subject.pdf)_
 
 # Description
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
+_NB: this project has to be ran on a little-endian environment._
+
 ### Global flowchart
 ![Flowchart](https://github.com/user-attachments/assets/7a65aefb-11f3-4444-b78b-d071f90144b4)
 
@@ -38,6 +40,7 @@ If a byte starts with a 1, it is a multiple byte character. The number of consec
 
 ### About binary operation
 - _[Binary representation of a string](https://stackoverflow.com/questions/5666900/converting-c-string-to-binary-representation)_
+- _[Assemble a byte in integer](https://stackoverflow.com/questions/12240299/convert-bytes-to-int-uint-in-c)_
 
 ### About encoding characters
 - _[Documentation on UTF-8 (Wikipedia)](https://fr.wikipedia.org/wiki/UTF-8)_
@@ -50,4 +53,4 @@ If a byte starts with a 1, it is a multiple byte character. The number of consec
 
 ### AI Usage (Gemini 3)
 - Helped me better understand how bitwise operators work. Had trouble understanding that `character_int >> 7 & 1` was really just comparing the 7th bit of `character_int` to `1`.
-- Helped me troubleshoot a memory allocation issue (`encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)`) for a 2d array... It gave me a sweet tip: `encoded = (char **)malloc((sizeof(*encoded) ...)` !
+- Helped me troubleshoot a memory allocation issue: `encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)`) for a 2d array... It gave me a sweet tip: `encoded = (char **)malloc((sizeof(*encoded) ...)` !

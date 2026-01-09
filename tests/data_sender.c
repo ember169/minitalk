@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   data_sender.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/20 09:40:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/09 15:29:08 by lgervet          ###   ########.fr       */
+/*   Created: 2026/01/09 14:01:23 by lgervet           #+#    #+#             */
+/*   Updated: 2026/01/09 14:01:24 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../includes/minitalk.h"
 
-# ifndef BITS_NB 
-#  define BITS_NB	8
-# endif
+int	main(int ac, char **av)
+{
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <string.h>
-# include "../libft/includes/libft.h"
-
-char	*convert_char_to_binary(int char_int);
-
-#endif
+}
