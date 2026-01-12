@@ -14,8 +14,6 @@ A high-speed inter-process communication project. The goal is to transmit string
 - ACK System: server sends a signal back to the client for every bit received, preventing data loss.
 - Unicode Support: full UTF-8 compatibility.
 
-_NB: this project has to be ran on a little-endian environment._
-
 ### Global flowchart
 ![Flowchart](https://github.com/user-attachments/assets/7a65aefb-11f3-4444-b78b-d071f90144b4)
 
@@ -25,6 +23,8 @@ _NB: this project has to be ran on a little-endian environment._
 1. `make`
 2. `./server` to show PID
 3. `./client [SERVER PID] "String to send"`
+
+_NB: this project was desgined to be ran on a little-endian environment._
 
 # Resources
 <!-- section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project. -->
