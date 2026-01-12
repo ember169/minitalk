@@ -3,21 +3,28 @@ _[Subject (pdf)](https://cdn.intra.42.fr/pdf/pdf/185021/en.subject.pdf)_
 
 # Description
 <!-- Section that clearly presents the project, including its goal and a brief overview. -->
+A high-speed inter-process communication project. The goal is to transmit strings between a client and a server using only UNIX signals.
+
+### Technical prerequisites
+- Bit-by-bit transmission via SIGUSR1 (representing 0) and SIGUSR2 (representing 1).
+- Instantaneous output. Must handle 100+ characters per second.
+- The server must stay alive and handle multiple clients sequentially
+
+### Bonus features
+- ACK System: server sends a signal back to the client for every bit received, preventing data loss.
+- Unicode Support: full UTF-8 compatibility.
+
 _NB: this project has to be ran on a little-endian environment._
 
 ### Global flowchart
 ![Flowchart](https://github.com/user-attachments/assets/7a65aefb-11f3-4444-b78b-d071f90144b4)
 
-### Unicode to binary converter
-_Flowchart in progress..._
-
-
 # Instructions
 <!-- section containing any relevant information about compilation, installation, and/or execution. -->
 ### Compilation and execution
-`make`
-`./server`: shows PID
-`./client <server's PID> <string to send>`
+1. `make`
+2. `./server` to show PID
+3. `./client [SERVER PID] "String to send"`
 
 # Resources
 <!-- section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project. -->
