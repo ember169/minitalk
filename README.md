@@ -11,9 +11,6 @@ _NB: this project has to be ran on a little-endian environment._
 ### Unicode to binary converter
 _Flowchart in progress..._
 
-*Notes*
-utf-8 support:
-If a byte starts with a 1, it is a multiple byte character. The number of consecutives 1 at the beginning of the byte is the number of bytes the character needs.
 
 # Instructions
 <!-- section containing any relevant information about compilation, installation, and/or execution. -->
@@ -30,6 +27,7 @@ If a byte starts with a 1, it is a multiple byte character. The number of consec
 - _[Difference between SIGUSR1 and SIGUSR2](https://stackoverflow.com/questions/27403641/difference-between-sigusr1-and-sigusr2)_
 - _[Tips on sending acknowledgment from the server](https://stackoverflow.com/questions/13477714/how-to-send-signal-sigusr1-and-sigusr2-from-parent-to-children)_
 - _[Tips on using signals in C](https://thelinuxcode.com/signal_handlers_c_programming_language)_
+- _[Example of signals usage](https://github.com/Basel-Dawoud/Send-Receive_LinuxSignals/blob/main/receiver.c)_
 
 ### About processes
 - _[Documentation on processes](https://www.gnu.org/software/libc/manual/html_node/Processes.html)_
@@ -53,4 +51,6 @@ If a byte starts with a 1, it is a multiple byte character. The number of consec
 
 ### AI Usage (Gemini 3)
 - Helped me better understand how bitwise operators work. Had trouble understanding that `character_int >> 7 & 1` was really just comparing the 7th bit of `character_int` to `1`.
-- Helped me troubleshoot a memory allocation issue: `encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)`) for a 2d array... It gave me a sweet tip: `encoded = (char **)malloc((sizeof(*encoded) ...)` !
+- Helped me troubleshoot a memory allocation issue: `encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)` for a 2d array... also gave me a tip: `encoded = (char **)malloc((sizeof(*encoded) ...)`.
+- Helped me find other ways than ugly infinite loops to wait for signals: `pause()` and `sigsuspend()`.
+- Hinted me to realize `signal()` and `sigaction()` were different.

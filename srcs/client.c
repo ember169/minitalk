@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/09 15:47:18 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/12 17:54:02 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,23 @@
 */
 static int	send_binary(int target, char **s)
 {
-	int	i;
-	int	j;
+	int			i;
+	int			j;
 
 	i = 0;
 	while (s[i])
 	{
 		j = 0;
+		ft_printf("[ ] Sending '%s'\n", s[i]);
 		while (s[i][j])
 		{
 			if (s[i][j] == '0')
 				kill(target, SIGUSR1);
-			else
+			else if (s[i][j] == '1')
 				kill(target, SIGUSR2);
-			// if (!wait_for_ack())
-			// 	return (0);
+			else
+				ft_printf("[!] Wrong bit read.");
+			client_wait_for_signal();
 			j++;
 		}
 		i++;
@@ -104,5 +106,4 @@ int	main(int ac, char **av)
 	if (!i)
 		ft_printf("[x] Error\n");
 	return (i);
-
 }

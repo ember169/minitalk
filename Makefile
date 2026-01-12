@@ -6,7 +6,7 @@
 #    By: lgervet <42@leogervet.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/20 10:49:16 by lgervet           #+#    #+#              #
-#    Updated: 2025/12/23 14:21:07 by lgervet          ###   ########.fr        #
+#    Updated: 2026/01/11 15:49:45 by lgervet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ LIBFT_DIR := libft
 LIBFT     := $(LIBFT_DIR)/libft.a
 
 # ==== Sources ====
-SRCS_COMMON := srcs/utils.c
+SRCS_COMMON := srcs/utils.c \
+	srcs/signal_handler.c
 SRCS_CLIENT := srcs/client.c $(SRCS_COMMON)
 SRCS_SERVER := srcs/server.c $(SRCS_COMMON)
 

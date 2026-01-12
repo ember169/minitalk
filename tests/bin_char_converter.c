@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 14:52:00 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/09 14:11:21 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/11 14:52:18 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 	int		i;
 	size_t	len;
 	char	**encoded;
-	char	*buf;
 
 	if (ac < 2)
 		return (1);

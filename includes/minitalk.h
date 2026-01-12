@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:40:28 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/09 15:29:08 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/12 17:53:43 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 # include "../libft/includes/libft.h"
 
 char	*convert_char_to_binary(int char_int);
+void	server_wait_for_signals(void);
+void	client_wait_for_signal(void);
 
 #endif
