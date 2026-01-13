@@ -60,4 +60,4 @@ _NB: this project was desgined to be ran on a little-endian environment._
 - Helped me better understand how bitwise operators work. Had trouble understanding that `character_int >> 7 & 1` was really just comparing the 7th bit of `character_int` to `1`.
 - Helped me troubleshoot a memory allocation issue: `encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)` for a 2d array... also gave me a tip: `encoded = (char **)malloc((sizeof(*encoded) ...)`.
 - Helped me find other ways than ugly infinite loops to wait for signals: `pause()` and `sigsuspend()`.
-- Hinted me to realize `signal()` and `sigaction()` were different.
+- Hinted me to understand how `signal()` and `sigaction()` are different and made sense of the manual of `sigaction()` for me.

@@ -6,25 +6,24 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/12 17:54:02 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/13 16:52:31 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-// static int	handle_ack(int sig)
-// {
-// 	printf("[ ] Received ACK\n");
-// 	return (1);
-// }
+static void	client_handle_signal(int sig)
+{
+	if (sig)
+		;
+	return ;
+}
 
-// static int	wait_for_ack(void)
-// {
-// 	signal(SIGUSR1, handle_ack);
-// 	while (1)
-// 		usleep(1);
-// 	return (handle_ack);
-// }
+void	client_wait_for_signal(struct sigaction sa)
+{
+	sigaction(SIGUSR1, &sa, NULL);
+	sigsuspend(&sa.sa_mask);
+}
 
 /*
 ** send_binary:
@@ -34,10 +33,10 @@
 **     @param **s  	  str (in binary) to send
 **     @return 1 if success / 0 if error
 */
-static int	send_binary(int target, char **s)
+static int	send_binary(int target, char **s, struct sigaction sa)
 {
-	int			i;
-	int			j;
+	int					i;
+	int					j;
 
 	i = 0;
 	while (s[i])
@@ -52,7 +51,7 @@ static int	send_binary(int target, char **s)
 				kill(target, SIGUSR2);
 			else
 				ft_printf("[!] Wrong bit read.");
-			client_wait_for_signal();
+			client_wait_for_signal(sa);
 			j++;
 		}
 		i++;
@@ -69,7 +68,7 @@ static int	send_binary(int target, char **s)
 **     @param target  pid given by user (av[1])
 **     @return 1 if success / 0 if error
 */
-static int	process_string(char *s, int target)
+static int	process_string(char *s, int target, struct sigaction sa)
 {
 	size_t	i;
 	char	**encoded;
@@ -86,15 +85,18 @@ static int	process_string(char *s, int target)
 		i++;
 	}
 	ft_printf("[ ] Str encoded in binary.\n");
-	i = send_binary(target, encoded);
+	i = send_binary(target, encoded, sa);
 	return (free(encoded), i);
 }
 
 int	main(int ac, char **av)
 {
-	pid_t	target;
-	int		i;
+	struct sigaction	sa;
+	pid_t				target;
+	int					i;
 
+	sa.sa_handler = &client_handle_signal;
+	sigemptyset(&sa.sa_mask);
 	if (ac < 3)
 	{
 		ft_printf("[x] Client usage: launch server first. \
@@ -102,7 +104,7 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	target = ft_atoi(av[1]);
-	i = process_string(av[2], target);
+	i = process_string(av[2], target, sa);
 	if (!i)
 		ft_printf("[x] Error\n");
 	return (i);
