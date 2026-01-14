@@ -6,17 +6,11 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:41 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/13 16:54:05 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/14 12:41:27 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-
-void	reforge_bin_str()
-{
-	static char				*bin_str;
-
-}
 
 static void	server_handle_signal(int sig, siginfo_t *info, void *context)
 {
@@ -34,7 +28,9 @@ int	main(void)
 {
 	struct sigaction	sa;
 	pid_t				pid;
+	static char			*bin_str;
 
+	bin_str = (char *)malloc((BITS_NB + 1) * sizeof(char));
 	pid = getpid();
 	ft_printf("[x] Server PID: %d\n", pid);
 	sigemptyset(&sa.sa_mask);
