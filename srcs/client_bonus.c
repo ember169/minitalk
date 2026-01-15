@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:06 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/15 14:20:54 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/15 15:50:13 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	send_binary(int target, char **s, struct sigaction sa)
 static int	process_string(char *s, int target, struct sigaction sa)
 {
 	size_t	i;
+	int		j;
 	char	**encoded;
 	size_t	len;
 
@@ -72,6 +73,7 @@ static int	process_string(char *s, int target, struct sigaction sa)
 	encoded = (char **)malloc(sizeof(*encoded) * (len + 1));
 	if (!encoded)
 		return (1);
+	ft_bzero(encoded, sizeof(*encoded) * (len + 1));
 	i = 0;
 	while (i < len)
 	{
@@ -79,6 +81,12 @@ static int	process_string(char *s, int target, struct sigaction sa)
 		i++;
 	}
 	i = send_binary(target, encoded, sa);
+	j = 0;
+	while (encoded[j])
+	{
+		free(encoded[j]);
+		j++;
+	}
 	return (free(encoded), i);
 }
 
@@ -95,6 +103,8 @@ int	main(int ac, char **av)
 			Then: './client <server pid> <string to pass>'");
 		return (0);
 	}
+	ft_bzero(&sa, sizeof(struct sigaction));
+	sigemptyset(&sigset);
 	sigaddset(&sigset, SIGUSR1);
 	sigprocmask(SIG_BLOCK, &sigset, NULL);
 	sa.sa_handler = &client_handle_signal;

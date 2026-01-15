@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:43:41 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/15 13:46:17 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/15 15:06:16 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ int	main(void)
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		sigsuspend(&sa.sa_mask);
+	return (1);
 }
