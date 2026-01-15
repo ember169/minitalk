@@ -8,11 +8,13 @@ A high-speed inter-process communication project. The goal is to transmit string
 ### Technical prerequisites
 - Bit-by-bit transmission via SIGUSR1 (representing 0) and SIGUSR2 (representing 1).
 - Instantaneous output. Must handle 100+ characters per second.
-- The server must stay alive and handle multiple clients sequentially
+- The server must stay alive and handle multiple clients sequentially.
 
 ### Bonus features
 - ACK System: server sends a signal back to the client for every bit received, preventing data loss.
 - Unicode Support: full UTF-8 compatibility.
+
+_NB: `_bonus.c` files are exactly the same as the originals, they've been created exclusively to match with the evaluation requirements._
 
 ### Global flowchart
 ![Flowchart](https://github.com/user-attachments/assets/7a65aefb-11f3-4444-b78b-d071f90144b4)
@@ -21,10 +23,10 @@ A high-speed inter-process communication project. The goal is to transmit string
 <!-- section containing any relevant information about compilation, installation, and/or execution. -->
 ### Compilation and execution
 1. `make`
-2. `./server` to show PID
+2. `./server` to run server and show its PID
 3. `./client [SERVER PID] "String to send"`
 
-_NB: this project was desgined to be ran on a little-endian environment._
+_NB: this project was designed to be ran on a little-endian environment._
 
 # Resources
 <!-- section listing classic references related to the topic (documentation, articles, tutorials, etc.), as well as a description of how AI was used — specifying for which tasks and which parts of the project. -->
@@ -57,7 +59,25 @@ _NB: this project was desgined to be ran on a little-endian environment._
 - _[How to measure execution time on Linux (`time` command )](https://itsfoss.gitlab.io/post/find-the-execution-time-of-a-command-or-process-in-linux/)_
 
 ### AI Usage (Gemini 3)
-- Helped me better understand how bitwise operators work. Had trouble understanding that `character_int >> 7 & 1` was really just comparing the 7th bit of `character_int` to `1`.
+- Better understand how bitwise operators work. Had trouble understanding that `character_int >> 7 & 1` was really just comparing the 7th bit of `character_int` to `1`.
 - Helped me troubleshoot a memory allocation issue: `encoded = (char **)malloc((sizeof(char) ...)` instead of `encoded = (char **)malloc((sizeof(char *) ...)` for a 2d array... also gave me a tip: `encoded = (char **)malloc((sizeof(*encoded) ...)`.
-- Helped me find other ways than ugly infinite loops to wait for signals: `pause()` and `sigsuspend()`.
-- Hinted me to understand how `signal()` and `sigaction()` are different and made sense of the manual of `sigaction()` for me.
+- Find other ways than ugly infinite loops to wait for signals: `pause()` and `sigsuspend()`.
+- Understand how `signal()` and `sigaction()` are different and made sense of the manual of `sigaction()` for me.
+- Debug a signal synchronization issue I had no idea happened.
+- Craft a complete unicode stress test:
+```
+"🚀 [TEST UNICODE] 🚀
+🌍 Hello World! - 🇫🇷 Bonjour le monde ! - 🇯🇵 こんにちは世界 - 🇷🇺 Привет, мир!
+🔥 Performance Test: ❄️ ❄️ ❄️
+Minitalk handles: 
+- Symbols: ₪ ₣ ℇ ℟ ℻ ⅀ ↀ ↱ ⇶ ∰ ⊞ ⊠
+- Math: ∬ ∑ ∏ ∿ ⊻ ⊕ ⊗
+- Greek: α β γ δ ε ζ η θ ι κ λ μ ν ξ ο π ρ σ τ υ φ χ ψ ω
+- Mixed: ░▒▓█ █▓▒░ 
+--------------------------------------------------
+LOREM IPSUM UNICODE EDITION:
+Lorem ipsum dolor sit amet, ꞵonsectetur adipiꞑcing elit. 
+Σεδ δο ειυσμοδ τεμπορ ιντιδιδυντ υτ λαβορε ετ δολορε μαγνα αλιθυα. 
+Ут ενιμ αδ μινιμ υενιαμ, θυις νοστρυδ εχερτιτατιον υλλαμτο λαβορις... 
+✅ Fin du test de transmission massive ✅"
+```

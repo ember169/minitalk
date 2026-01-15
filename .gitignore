@@ -14,3 +14,6 @@ client
 *~
 *.swp
 *.dSYM
+
+.bonus_done
+.mandatory_done

@@ -6,7 +6,7 @@
 /*   By: lgervet <42@leogervet.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:44:01 by lgervet           #+#    #+#             */
-/*   Updated: 2026/01/09 15:47:34 by lgervet          ###   ########.fr       */
+/*   Updated: 2026/01/15 13:58:10 by lgervet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,25 @@ char	*convert_char_to_binary(int char_int)
 	return (encoded_char);
 }
 
+void	wait_for_ack(struct sigaction sa)
+{
+	sigset_t	sigset;
 
+	sigemptyset(&sigset);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigsuspend(&sigset);
+}
+
+void	send_null_char(int target, struct sigaction sa)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		kill(target, SIGUSR1);
+		wait_for_ack(sa);
+		i++;
+	}
+	return ;
+}
